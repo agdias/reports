@@ -7,8 +7,8 @@ import { authenticate } from './utils/api2'
 import Roteadores from './components/Roteadores'
 
 const  App = () => {
-    const [ user, setUser ] = useState("Admin_Zabbix")
-    const [ password, setPassword ] = useState("Z@bB1Xx")
+    const [ user, setUser ] = useState("censored")
+    const [ password, setPassword ] = useState("censored")
     const [ token, setToken ] = useState(null)
     useEffect(() => {
         authenticate(user,password)

@@ -7,11 +7,12 @@ import { Button,
          Form,
          Table} from 'semantic-ui-react'
 
-
+import { Link } from 'react-router-dom'
 import  DatePicker  from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 import ptBR from 'date-fns/locale/pt-BR'
+
 
 
 
@@ -32,10 +33,10 @@ const dispatch = useDispatch()
 useEffect(() => {
     getServices(props.token)
       .then((services) => dispatch(addServices(services)))
-      .catch(() => setError("Nao foi possivel buscar os servicos"))
+      .catch(() => console.error("no services"))
  
    
-},[services])
+},[])
 
   const onSubmitHandler = (event) => {
       event.preventDefault()
@@ -71,8 +72,12 @@ const isDateRange = () => {
 
     return (
         <React.Fragment>
+          
+
+
 
             <div className="date-select">
+              
                 <Form style={{marginTop:65,marginLeft: 20}}   onSubmit={onSubmitHandler}> 
                               <Form.Group inline>
                                 <Form.Field
@@ -124,7 +129,7 @@ const isDateRange = () => {
                                 const si = services[service].serviceid
                                  return (
                                     <Table.Row>
-                                          <Table.Cell> {services[service].name}</Table.Cell>
+                                          <Table.Cell><Link to={`/roteadores/${services[service].serviceid}`}> {services[service].name}</Link></Table.Cell>
                                            
                                         {/* {sla[si] && }    <Table.Cell>{sla[si].sla[0].sla}</Table.Cell> */}
                                         {
@@ -166,18 +171,8 @@ const isDateRange = () => {
                         </Table>
 
             </div>
-
-             
-          
-                       
-                       
-                   
            
-           
-                       
-           
-                      
-        
+     
         </React.Fragment>
     )
 }

@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import './assets/styles/index.css'
 import 'semantic-ui-css/semantic.min.css'
 import App from './App';
 import rootReducer from './reducers'
+
 import reportWebVitals from './reportWebVitals';
 
 
@@ -18,16 +20,16 @@ const store = createStore(
 
 
 ReactDOM.render(
-  // <React.StrictMode>
-    <Provider store={store}>
-    
+   <Router>
+     <Provider store={store}> 
+      
         <App />
+      
+     </Provider>
+   </Router>,
+    
     
 
-     
-    </Provider>,
-    
-  // </React.StrictMode>,
   document.getElementById('root')
 );
 

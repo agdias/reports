@@ -1,42 +1,41 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getServices , getSLA} from '../utils/api2'
+import { authenticate, getServices , getSLA} from '../utils/api2'
 import { addServices, addSLA } from '../actions'
 
 import { Button,
          Form,
          Table} from 'semantic-ui-react'
 
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import  DatePicker  from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 import ptBR from 'date-fns/locale/pt-BR'
 
-
-
-
-
-
 function Roteadores(props) {
 
 const [ startDate, setStartDate ] = useState(null)
 const [ endDate, setEndDate ] = useState(null)
-const [ serviceIds, setServiceIds ] = useState(null)
-const [ result, setResult ] = useState(null)
 const [ error, setError ] = useState(null)
+const token =  useSelector((state) => state.token )
 
-const services = useSelector((state) => state.services)
-const sla = useSelector ((state) => state.sla)
 const dispatch = useDispatch()
+const [ count, setCount ] = useState(0)
+const services = useSelector(state => state.services)
+const sla = useSelector(state => state.sla)
 
 useEffect(() => {
-    getServices(props.token)
-      .then((services) => dispatch(addServices(services)))
-      .catch(() => console.error("no services"))
- 
-   
-},[])
+  
+  getServices(props.token)
+    .then((response) => {
+        response ? dispatch(addServices(response)) : setError("No Services available")
+    })
+}, [props.token])
+
+
+
+
 
   const onSubmitHandler = (event) => {
       event.preventDefault()
@@ -67,17 +66,17 @@ const isDateRange = () => {
 }
 
 
-    {error && <h1>{error}Error</h1>}
+    {error && <h1>{error}</h1>}
     
-
+ 
     return (
         <React.Fragment>
           
 
-
+            {count}
 
             <div className="date-select">
-              
+            
                 <Form style={{marginTop:65,marginLeft: 20}}   onSubmit={onSubmitHandler}> 
                               <Form.Group inline>
                                 <Form.Field
@@ -107,10 +106,13 @@ const isDateRange = () => {
                                   onChange={(date) => onEndDateChangeHandler(date)}
                                 />
                                    <Button disabled={isDateRange()} color="instagram" type="submit">Consultar</Button>   
+                                   <Button  color="youtube" type="submit">Reset</Button>   
                               </Form.Group>
                 </Form>
             </div>
-            <div className="result-table">
+            {
+                services &&
+                <div className="result-table">
                 <Table celled selectable>
                               <Table.Header>
                                   <Table.Row>
@@ -171,6 +173,9 @@ const isDateRange = () => {
                         </Table>
 
             </div>
+
+            }
+          
            
      
         </React.Fragment>

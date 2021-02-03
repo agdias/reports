@@ -37,7 +37,8 @@ export function authenticate(username, password) {
 
 
 export function getServices(token) {
-   
+  
+  
     return fetch(endpoint, {
         headers: {...headers},
         method: "POST",
@@ -47,18 +48,18 @@ export function getServices(token) {
             "params": {
                 "output": "extend",
                 
-                 //"selectDependencies": "extend", 
+                 "selectDependencies": "extend", 
             },
             "auth": token,
             "id": 1
         })
     })
+    
     .then((response) => response.json())
     .then((services) => {
-        if (!services) {
-            throw new Error("No services available!")
-        }
+       
         return services.result
+        
     })
     .catch((error) => {
         return error

@@ -1,12 +1,14 @@
 
 
-export function tokenReducer(state=[], action) {
+export function tokenReducer(state={}, action) {
+    const { token } = action
     switch (action.type) {
         case 'ADD_TOKEN':
-            return [
+        
+            return {
                 ...state,
-                   action.token
-            ]
+                   token
+            }
         default: return state
     }
 }

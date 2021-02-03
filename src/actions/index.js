@@ -13,6 +13,7 @@ export  function addServices(services) {
         type: 'ADD_SERVICES',
         services
     }
+   
 }
 
 export function addSLA(sla) {
@@ -22,6 +23,7 @@ export function addSLA(sla) {
         
     }
 }
+
 
 
 

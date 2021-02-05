@@ -19,6 +19,32 @@ App {
     margin: auto;
 }
 .result-table {
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
+   
+   
+}
+
+.daily-header {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+ 
+    height: 5em;
+    padding: 10px;
+   
+}
+
+.month-picker {
+   
+    
+    border: thin solid white;
+    width: 600px;
+}
+
+.header-title {
+  
+    font-size: 15px;
 }

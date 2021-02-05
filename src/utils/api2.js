@@ -48,7 +48,7 @@ export function getServices(token) {
             "params": {
                 "output": "extend",
                 
-                 "selectDependencies": "extend", 
+                /*  "selectDependencies": "extend",  */
             },
             "auth": token,
             "id": 1
@@ -109,11 +109,14 @@ export function getHostGroups(token) {
             "method":"hostgroup.get",
             "params": {
                "output": "extend",
-               "filter": {
+               
+                  "filter": {
                    "name": [
-                       "Roteadores"
-                   ]
-               }
+                       "Roteadores",
+                       "CORED"
+                    ]
+                } 
+              
             },
             "auth": token,
             "id": 1
@@ -121,6 +124,8 @@ export function getHostGroups(token) {
         }
         )
     })
+    .then((response) => response.json())
+    .then((data) => data.result)
 }
 
 

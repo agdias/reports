@@ -18,7 +18,7 @@ function Roteadores(props) {
 const [ startDate, setStartDate ] = useState(null)
 const [ endDate, setEndDate ] = useState(null)
 const [ error, setError ] = useState(null)
-const token =  useSelector((state) => state.token )
+//const token =  useSelector((state) => state.token )
 
 const dispatch = useDispatch()
 const [ count, setCount ] = useState(0)
@@ -113,6 +113,7 @@ const isDateRange = () => {
             {
                 services &&
                 <div className="result-table">
+                    
                 <Table celled selectable>
                               <Table.Header>
                                   <Table.Row>
@@ -131,7 +132,23 @@ const isDateRange = () => {
                                 const si = services[service].serviceid
                                  return (
                                     <Table.Row>
-                                          <Table.Cell><Link to={`/roteadores/${services[service].serviceid}`}> {services[service].name}</Link></Table.Cell>
+                                          <Table.Cell>
+                                          {/*     <Link to={`/roteadores/${services[service].serviceid}`}> {services[service].name} */}
+                                              <Link 
+                                                to={{
+                                                    pathname: `/roteadores/${services[service].serviceid}`,
+                                                    token: props.token
+                                                    
+                                                    
+                                                }}
+                                              
+                                               
+                                              >
+                                                   {services[service].name}
+                                              
+                                              </Link>
+                                          
+                                          </Table.Cell>
                                            
                                         {/* {sla[si] && }    <Table.Cell>{sla[si].sla[0].sla}</Table.Cell> */}
                                         {

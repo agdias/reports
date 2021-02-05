@@ -18,11 +18,9 @@ function Roteadores(props) {
 const [ startDate, setStartDate ] = useState(null)
 const [ endDate, setEndDate ] = useState(null)
 const [ error, setError ] = useState(null)
-<<<<<<< HEAD
-//const token =  useSelector((state) => state.token )
-=======
 
->>>>>>> 853790a4733515d54e4ddc08ad32783015881489
+//const token =  useSelector((state) => state.token )
+
 
 const dispatch = useDispatch()
 

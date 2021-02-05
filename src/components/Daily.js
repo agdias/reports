@@ -83,15 +83,18 @@ function Daily(props) {
 
     
     
-   const any = dateRange(2021,1,3)
+      console.log(services[serviceId])
    
   
     return (
         <React.Fragment>
           <div className="daily-header">
              <div className="header-title">
-           
-               <h2>Relatório de  Disponibilidade - {services[serviceId].name}  </h2>
+           {
+             services &&
+             <h2>Relatório de  Disponibilidade {services[serviceId].name} </h2>
+           }
+               
               
                
              </div> 
@@ -125,7 +128,7 @@ function Daily(props) {
                       </Table.Row>
                   </Table.Header>
               </Table>
-          {JSON.stringify(dateRange(2020,5,10))} 
+        
             {/*  Bom, vamos lá. Cada linha vai corresponder a um dia do mes. Com o dia corrente em mãos, faço um loop de 1 até o dia corrente.
              Por exemplo, hoje, dia 05 de fevereiro de 2021. for i in 1..today
              Para cada dia, calculo o SLA daquele item

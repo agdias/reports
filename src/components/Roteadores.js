@@ -68,7 +68,6 @@ const isDateRange = () => {
 }
 
 
-    {error && <h1>{error}</h1>}
     
  
     return (

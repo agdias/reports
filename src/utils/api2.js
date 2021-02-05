@@ -48,7 +48,11 @@ export function getServices(token) {
             "params": {
                 "output": "extend",
                 
+<<<<<<< HEAD
                 /*  "selectDependencies": "extend",  */
+=======
+                 "selectParent": "extend", 
+>>>>>>> 853790a4733515d54e4ddc08ad32783015881489
             },
             "auth": token,
             "id": 1

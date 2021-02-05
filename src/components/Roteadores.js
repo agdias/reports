@@ -18,10 +18,14 @@ function Roteadores(props) {
 const [ startDate, setStartDate ] = useState(null)
 const [ endDate, setEndDate ] = useState(null)
 const [ error, setError ] = useState(null)
+<<<<<<< HEAD
 //const token =  useSelector((state) => state.token )
+=======
+
+>>>>>>> 853790a4733515d54e4ddc08ad32783015881489
 
 const dispatch = useDispatch()
-const [ count, setCount ] = useState(0)
+
 const services = useSelector(state => state.services)
 const sla = useSelector(state => state.sla)
 
@@ -73,7 +77,7 @@ const isDateRange = () => {
         <React.Fragment>
           
 
-            {count}
+          
 
             <div className="date-select">
             
@@ -117,11 +121,11 @@ const isDateRange = () => {
                 <Table celled selectable>
                               <Table.Header>
                                   <Table.Row>
-                                      <Table.HeaderCell>Link</Table.HeaderCell>
+                                      <Table.HeaderCell>Links</Table.HeaderCell>
                                       <Table.HeaderCell>Disponibilidade</Table.HeaderCell>
-                                      <Table.HeaderCell>Ok Time</Table.HeaderCell>
-                                      <Table.HeaderCell>Downtime</Table.HeaderCell>
-                                      <Table.HeaderCell>Problem time</Table.HeaderCell>
+                                      <Table.HeaderCell>Tempo Disponível (H)</Table.HeaderCell>
+                                     
+                                      <Table.HeaderCell>Tempo Indisponível (H)</Table.HeaderCell>
     
                                   </Table.Row>
                             </Table.Header>
@@ -154,25 +158,19 @@ const isDateRange = () => {
                                         {
                                             sla[services[service].serviceid] 
                                             ?
-                                            <Table.Cell>{Number(sla[si].sla[0].sla).toFixed(4)}</Table.Cell>
+                                            <Table.Cell>{Number(sla[si].sla[0].sla).toFixed(2)}</Table.Cell>
                                             :
                                             <Table.Cell>Indisponivel</Table.Cell>
                                         }
                                         {
                                             sla[si] 
                                             ?
-                                            <Table.Cell>{Math.round((sla[si].sla[0].okTime/3600)/10)*10}</Table.Cell>
+                                            <Table.Cell>{Number(sla[si].sla[0].okTime/3600).toFixed(4)}</Table.Cell>
                                             :
                                             <Table.Cell>Indisponivel</Table.Cell>
                                         }
                                         
-                                        {
-                                            sla[si] 
-                                            ?
-                                            <Table.Cell>{Math.round((sla[si].sla[0].downtimeTime/3600)/10)*10}</Table.Cell>
-                                            :
-                                            <Table.Cell>Indisponivel</Table.Cell>
-                                        }
+                                       
                                         {
                                             sla[si] 
                                             ?

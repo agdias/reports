@@ -107,7 +107,7 @@ const isDateRange = () => {
                                   onChange={(date) => onEndDateChangeHandler(date)}
                                 />
                                    <Button disabled={isDateRange()} color="instagram" type="submit">Consultar</Button>   
-                                   <Button  color="youtube" type="submit">Reset</Button>   
+                                   
                               </Form.Group>
                 </Form>
             </div>
@@ -121,7 +121,7 @@ const isDateRange = () => {
                                       <Table.HeaderCell>Links</Table.HeaderCell>
                                       <Table.HeaderCell>Disponibilidade</Table.HeaderCell>
                                       <Table.HeaderCell>Tempo Disponível (H)</Table.HeaderCell>
-                                     
+                                      <Table.HeaderCell>Downtime time (H)</Table.HeaderCell>
                                       <Table.HeaderCell>Tempo Indisponível (H)</Table.HeaderCell>
     
                                   </Table.Row>
@@ -162,7 +162,15 @@ const isDateRange = () => {
                                         {
                                             sla[si] 
                                             ?
-                                            <Table.Cell>{Number(sla[si].sla[0].okTime/3600).toFixed(4)}</Table.Cell>
+                                            <Table.Cell>{Number(sla[si].sla[0].okTime/3600).toFixed(2)}</Table.Cell>
+                                            :
+                                            <Table.Cell>Indisponivel</Table.Cell>
+                                        }
+
+{
+                                            sla[si] 
+                                            ?
+                                            <Table.Cell>{Number(sla[si].sla[0].downtimeTime/3600).toFixed(2)}</Table.Cell>
                                             :
                                             <Table.Cell>Indisponivel</Table.Cell>
                                         }
@@ -172,7 +180,7 @@ const isDateRange = () => {
                                             sla[si] 
                                             ?
                                             
-                                            <Table.Cell>{Math.round((sla[si].sla[0].problemTime/3600)/10)*10}</Table.Cell>
+                                            <Table.Cell>{Number(sla[si].sla[0].problemTime/3600).toFixed(2)}</Table.Cell>
                                           
                                             :
                                             <Table.Cell>Indisponivel</Table.Cell>

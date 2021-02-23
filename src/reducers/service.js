@@ -6,14 +6,14 @@ export  function servicesReducer(state={}, action) {
     let target
     
    
-    console.info(action.services)
+    
     switch (action.type) {
       
         case 'ADD_SERVICES': 
           Object.keys(services).forEach((key) => {
               
               target  = {
-                [services[key].serviceid]: services[key]
+                [services[key].name]: services[key]
               } 
 
               result = Object.assign(result, target)

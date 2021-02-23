@@ -25,8 +25,8 @@ const [ disabled, setDisabled ] = useState(true)
 const [ header ] = useState([
     { label: "Roteador", key: "roteador" },
     { label: "serviceid", key: "serviceid"},
-    { label: "SLA", key: "sla" },
-    { label: "okTime", key: "roteador" },
+    { label: "sla", key: "sla" },
+    { label: "okTime", key: "okTime" },
     { label: "downtimeTime", key: "downtimeTime" },
     { label: "problemTime", key: "problemTime" },
 
@@ -147,7 +147,7 @@ const isDateRange = () => {
                                   onChange={(date) => onEndDateChangeHandler(date)}
                                 />
                                    <Button disabled={isDateRange()} color="instagram" type="submit">Consultar</Button> 
-                                   <Button  onClick={printReport} color='teal'>Gerar CSV</Button>
+                                   <Button  onClick={printReport} color='teal'>Gerar Arquivo CSV</Button>
                                    {
                                        report &&
                                        <CSVLink data={report} headers={header}>

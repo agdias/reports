@@ -22,13 +22,13 @@ const [ error, setError ] = useState(null)
 const [ open, setOpen ] = useState(false)
 const [ dimmer, setDimmer ] = useState(null)
 const [ disabled, setDisabled ] = useState(true)
+
 const [ header ] = useState([
     { label: "Roteador", key: "roteador" },
     { label: "serviceid", key: "serviceid"},
-    { label: "sla", key: "sla" },
-    { label: "okTime", key: "okTime" },
-    { label: "downtimeTime", key: "downtimeTime" },
-    { label: "problemTime", key: "problemTime" },
+    { label: "SLA", key: "sla" },
+    { label: "Tempo Disponível", key: "okTime" },
+    { label: "Tempo Indisponível", key: "problemTime" },
 
 ])
 
@@ -64,10 +64,9 @@ useEffect(() => {
         output.push({
             roteador: services[key].name,
             serviceid: services[key].serviceid,
-            sla: sla[services[key].serviceid].sla[0].sla,
-            okTime: sla[services[key].serviceid].sla[0].okTime,
-            downtimeTime: sla[services[key].serviceid].sla[0].downtimeTime,
-            problemTime:  sla[services[key].serviceid].sla[0].problemTime
+            sla: (Number(sla[services[key].serviceid].sla[0].sla).toFixed(2)) + "%",
+            okTime: Number((sla[services[key].serviceid].sla[0].okTime)/3600).toFixed(2),
+            problemTime:  Number((sla[services[key].serviceid].sla[0].problemTime)/3600).toFixed(2)
         })
         
       })
@@ -147,10 +146,10 @@ const isDateRange = () => {
                                   onChange={(date) => onEndDateChangeHandler(date)}
                                 />
                                    <Button disabled={isDateRange()} color="instagram" type="submit">Consultar</Button> 
-                                   <Button  onClick={printReport} color='teal'>Gerar Arquivo CSV</Button>
+                                   <Button  onClick={printReport} color='teal'>Gerar CSV</Button>
                                    {
                                        report &&
-                                       <CSVLink data={report} headers={header}>
+                                       <CSVLink data={report} headers={header} separator={";"}>
                                            Download
                                        </CSVLink>
                                    }
@@ -183,7 +182,6 @@ const isDateRange = () => {
                                       <Table.HeaderCell>Links</Table.HeaderCell>
                                       <Table.HeaderCell>Disponibilidade (%)</Table.HeaderCell>
                                       <Table.HeaderCell>Tempo Disponível (H)</Table.HeaderCell>
-                                      <Table.HeaderCell>Downtime time (H)</Table.HeaderCell>
                                       <Table.HeaderCell>Tempo Indisponível (H)</Table.HeaderCell>
     
                                   </Table.Row>
@@ -219,33 +217,27 @@ const isDateRange = () => {
                                             ?
                                             <Table.Cell>{Number(sla[si].sla[0].sla).toFixed(2)}</Table.Cell>
                                             :
-                                            <Table.Cell>Indisponivel</Table.Cell>
+                                            <Table.Cell>-</Table.Cell>
                                         }
                                         {
                                             sla[si] 
                                             ?
-                                            <Table.Cell>{Number(sla[si].sla[0].okTime/3600).toFixed(4)}</Table.Cell>
+                                            <Table.Cell>{Number(sla[si].sla[0].okTime/3600).toFixed(2)}</Table.Cell>
                                             :
-                                            <Table.Cell>Indisponivel</Table.Cell>
+                                            <Table.Cell>-</Table.Cell>
                                         }
 
-{
-                                            sla[si] 
-                                            ?
-                                            <Table.Cell>{Number(sla[si].sla[0].downtimeTime/3600).toFixed(4)}</Table.Cell>
-                                            :
-                                            <Table.Cell>Indisponivel</Table.Cell>
-                                        }
+
                                         
                                        
                                         {
                                             sla[si] 
                                             ?
                                             
-                                            <Table.Cell>{Number(sla[si].sla[0].problemTime/3600).toFixed(4)}</Table.Cell>
+                                            <Table.Cell>{Number(sla[si].sla[0].problemTime/3600).toFixed(2)}</Table.Cell>
                                           
                                             :
-                                            <Table.Cell>Indisponivel</Table.Cell>
+                                            <Table.Cell>-</Table.Cell>
                                         }
                                     </Table.Row>
                                  )
